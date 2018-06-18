@@ -120,6 +120,12 @@
                             :placeholder="i18n(field.meta.placeholder)"
                             @input="errors.clear(field.name)"
                             v-else-if="field.meta.type === 'timepicker'"/>
+                        <phone v-model="phone" 
+                            @onPhoneInput="onPhoneInput"
+                            :disabled="field.meta.disabled"
+                            :placeholder="i18n(field.meta.placeholder)"
+                            @input="errors.clear(field.name)"
+                            v-else-if="field.meta.type === 'phone'"/>   
                         <div class="control has-icons-right"
                             v-else-if="field.meta.type === 'textarea'">
                             <textarea :class="['textarea', { 'is-danger': errors.has(field.name) }]"
@@ -226,6 +232,7 @@ import VueSwitch from './VueSwitch.vue';
 import VueSelect from '../select/VueSelect.vue';
 import Datepicker from './Datepicker.vue';
 import Money from './Money.vue';
+import Phone from "./Phone.vue";
 
 fontawesome.library.add(faTrashAlt, faEye, faPlus, faCheck, faExclamationTriangle, faUndo, faInfo);
 
@@ -235,7 +242,7 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
-        Divider, VueSwitch, Modal, VueSelect, Datepicker, Money,
+        Divider, VueSwitch, Modal, VueSelect, Datepicker, Money, Phone
     },
 
     props: {
@@ -266,6 +273,7 @@ export default {
             loading: false,
             modal: false,
             errors: new Errors(),
+            phone: ""
         };
     },
 
